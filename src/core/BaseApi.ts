@@ -5,7 +5,7 @@ export class BaseApi {
   // Base URL for the API (set to the provided Azure endpoint)
   public readonly BASE_URL: string = 'https://proyectoconbasededatosyapi-h4ebgab7f8cqc0bj.spaincentral-01.azurewebsites.net';
 
-  protected getBaseUrl(endpoint: string): string {
+  public getBaseUrl(endpoint: string): string {
     // Ensure endpoint begins with a slash or is a full URL
     if (!endpoint) return this.BASE_URL;
     try {
@@ -15,7 +15,7 @@ export class BaseApi {
     }
   }
 
-  protected getDefaultHeaders(): HeadersInit {
+  public getDefaultHeaders(): HeadersInit {
     return {
       'Content-Type': 'application/json'
     };
