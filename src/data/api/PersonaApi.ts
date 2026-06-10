@@ -1,7 +1,7 @@
 import { injectable, inject } from 'inversify';
 import TYPES from '../../core/types';
 import { BaseApi } from '../../core/BaseApi';
-import { PersonaDTO } from '../dtos/PersonaDTO';
+import { PersonaDTO } from '../../domain/dtos/PersonaDTO';
 
 @injectable()
 export class PersonaApi {

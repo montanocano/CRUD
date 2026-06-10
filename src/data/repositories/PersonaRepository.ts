@@ -1,8 +1,8 @@
 import { injectable, inject } from 'inversify';
 import TYPES from '../../core/types';
 import { PersonaApi } from '../api/PersonaApi';
-import { PersonaDTO } from '../dtos/PersonaDTO';
-import { IPersonaRepository } from '../../interfaces/IPersonaRepository';
+import { PersonaDTO } from '../../domain/dtos/PersonaDTO';
+import { IPersonaRepository } from '../../domain/interfaces/IPersonaRepository';
 
 @injectable()
 export class PersonaRepository implements IPersonaRepository {

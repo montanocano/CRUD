@@ -1,7 +1,7 @@
 import { injectable, inject } from 'inversify';
 import TYPES from '../../core/types';
 import { BaseApi } from '../../core/BaseApi';
-import { DepartamentoDTO } from '../dtos/DepartamentoDTO';
+import { DepartamentoDTO } from '../../domain/dtos/DepartamentoDTO';
 
 @injectable()
 export class DepartamentoApi {
