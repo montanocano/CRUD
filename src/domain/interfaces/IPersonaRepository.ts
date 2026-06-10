@@ -1,4 +1,4 @@
-import { PersonaDTO } from '../data/dtos/PersonaDTO';
+import { PersonaDTO } from '../dtos/PersonaDTO';
 
 export interface IPersonaRepository {
   getAll(): Promise<PersonaDTO[]>;

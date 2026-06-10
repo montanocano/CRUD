@@ -29,17 +29,3 @@ App / Presentación
 - src/App/index.tsx y src/App/_layout.tsx: initializeApp carga departamentos y personas en paralelo y luego navega a WelcomeScreen. _layout es un placeholder para la pila de navegación.
 - src/components/: PersonaListItem.tsx, DepartamentoListItem.tsx — avatar/iniciales, detalles y acción de eliminar.
 
-Detalles de implementación y pendientes
-- DI: el contenedor enlaza implementaciones concretas; asegurarse de resolver el contenedor antes de su uso. Se actualizó tsconfig para soportar decoradores (experimentalDecorators, emitDecoratorMetadata).
-- Manejo de errores: los UseCases lanzan errores descriptivos; los ViewModels los capturan y exponen en .error para que las pantallas muestren errorContainer.
-- Subida de imágenes: PersonaApi.uploadImage implementado; EditarInsertarPersonaScreen incluye input de archivo y flujo de subida vía DI.
-- Rutas: las pantallas están bajo src/app/screens siguiendo la convención de Expo Router; si se prefiere otra convención de rutas, ajustar paths.
-
-Recomendaciones siguientes
-- Añadir tests unitarios para los UseCases que verifiquen las reglas de negocio (filtro por edad y prohibición de borrado).
-- Mejorar el mapeo de errores: mapear códigos HTTP a mensajes de usuario (ErrorMapper en UseCases o ViewModels).
-- Añadir validación de formularios y tests para EditarInsertarPersonaScreen.
-- Documentar el contrato de la API (forma esperada de los DTOs) y confirmar la existencia y comportamiento del endpoint upload-image.
-
-Ubicación
-- Este análisis está guardado en analisis/structure-analysis.md en la raíz del repositorio.

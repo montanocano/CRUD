@@ -1,4 +1,4 @@
-import { DepartamentoDTO } from '../data/dtos/DepartamentoDTO';
+import { DepartamentoDTO } from '../dtos/DepartamentoDTO';
 
 export interface IDepartamentoRepository {
   getAll(): Promise<DepartamentoDTO[]>;
