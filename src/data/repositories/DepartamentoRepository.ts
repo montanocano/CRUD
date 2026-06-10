@@ -1,14 +1,8 @@
 import { injectable, inject } from 'inversify';
 import TYPES from '../../core/types';
-import { DepartamentoApi, DepartamentoDTO } from '../api/DepartamentoApi';
-
-export interface IDepartamentoRepository {
-  getAll(): Promise<DepartamentoDTO[]>;
-  getById(id: number): Promise<DepartamentoDTO>;
-  create(payload: Partial<DepartamentoDTO>): Promise<DepartamentoDTO>;
-  update(id: number, payload: Partial<DepartamentoDTO>): Promise<DepartamentoDTO>;
-  delete(id: number): Promise<void>;
-}
+import { DepartamentoApi } from '../api/DepartamentoApi';
+import { DepartamentoDTO } from '../dtos/DepartamentoDTO';
+import { IDepartamentoRepository } from '../../interfaces/IDepartamentoRepository';
 
 @injectable()
 export class DepartamentoRepository implements IDepartamentoRepository {

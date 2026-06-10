@@ -1,6 +1,6 @@
 import { injectable, inject } from 'inversify';
 import TYPES from '../../core/types';
-import { IDepartamentoRepository } from '../../data/repositories/DepartamentoRepository';
+import { IDepartamentoRepository } from '../../interfaces/IDepartamentoRepository';
 
 @injectable()
 export class DepartamentoUseCases {

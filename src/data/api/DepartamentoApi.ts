@@ -1,11 +1,7 @@
 import { injectable, inject } from 'inversify';
 import TYPES from '../../core/types';
 import { BaseApi } from '../../core/BaseApi';
-
-export interface DepartamentoDTO {
-  idDepartamento: number;
-  nombreDepartamento: string;
-}
+import { DepartamentoDTO } from '../dtos/DepartamentoDTO';
 
 @injectable()
 export class DepartamentoApi {

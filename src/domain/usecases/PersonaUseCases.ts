@@ -1,6 +1,6 @@
 import { injectable, inject } from 'inversify';
 import TYPES from '../../core/types';
-import { IPersonaRepository } from '../../data/repositories/PersonaRepository';
+import { IPersonaRepository } from '../../interfaces/IPersonaRepository';
 
 @injectable()
 export class PersonaUseCases {

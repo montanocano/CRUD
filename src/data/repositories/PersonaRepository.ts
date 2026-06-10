@@ -1,14 +1,8 @@
 import { injectable, inject } from 'inversify';
 import TYPES from '../../core/types';
-import { PersonaApi, PersonaDTO } from '../api/PersonaApi';
-
-export interface IPersonaRepository {
-  getAll(): Promise<PersonaDTO[]>;
-  getById(id: number): Promise<PersonaDTO>;
-  create(payload: Partial<PersonaDTO>): Promise<PersonaDTO>;
-  update(id: number, payload: Partial<PersonaDTO>): Promise<PersonaDTO>;
-  delete(id: number): Promise<void>;
-}
+import { PersonaApi } from '../api/PersonaApi';
+import { PersonaDTO } from '../dtos/PersonaDTO';
+import { IPersonaRepository } from '../../interfaces/IPersonaRepository';
 
 @injectable()
 export class PersonaRepository implements IPersonaRepository {

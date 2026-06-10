@@ -1,18 +1,7 @@
 import { injectable, inject } from 'inversify';
 import TYPES from '../../core/types';
 import { BaseApi } from '../../core/BaseApi';
-
-export interface PersonaDTO {
-  id: number;
-  nombre: string;
-  apellidos: string;
-  fechaNac: string | null;
-  direccion?: string;
-  telefono?: string;
-  foto?: string | null;
-  idDepartamento?: number | null;
-  nombreDepartamento?: string | null;
-}
+import { PersonaDTO } from '../dtos/PersonaDTO';
 
 @injectable()
 export class PersonaApi {
