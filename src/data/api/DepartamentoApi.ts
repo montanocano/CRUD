@@ -38,8 +38,8 @@ export class DepartamentoApi {
     // Send idDepartamento: 0 so ASP.NET model binding does not reject a
     // missing required int field; the server overwrites it with the real id.
     const body = {
-      idDepartamento: 0,
-      nombreDepartamento: payload.nombreDepartamento ?? '',
+      id: 0,
+      nombre: payload.nombreDepartamento ?? '',
     };
     const res = await fetch(url, {
       method: 'POST',
@@ -53,8 +53,8 @@ export class DepartamentoApi {
   async update(id: number, payload: Partial<DepartamentoDTO>): Promise<DepartamentoDTO> {
     const url = this.baseApi.getBaseUrl(`${this.endpoint}/${id}`);
     const body = {
-      idDepartamento: id,
-      nombreDepartamento: payload.nombreDepartamento ?? '',
+      id,
+      nombre: payload.nombreDepartamento ?? '',
     };
     const res = await fetch(url, {
       method: 'PUT',

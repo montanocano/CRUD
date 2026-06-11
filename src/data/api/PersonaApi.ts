@@ -35,17 +35,16 @@ export class PersonaApi {
 
   async create(payload: Partial<PersonaDTO>): Promise<PersonaDTO> {
     const url = this.baseApi.getBaseUrl(this.endpoint);
-    // Build body: strip id (server assigns it); send fechaNac as ISO string
-    // or as empty string when absent (some ASP.NET models require the key present).
-    const body: any = {
-      nombre:          payload.nombre          ?? '',
-      apellidos:       payload.apellidos       ?? '',
-      fechaNac:        payload.fechaNac        ? new Date(payload.fechaNac).toISOString() : '',
-      direccion:       payload.direccion       ?? '',
-      telefono:        payload.telefono        ?? '',
-      foto:            payload.foto            ?? null,
-      idDepartamento:  payload.idDepartamento  ?? null,
+    const persona = {
+      nombre:         payload.nombre         ?? '',
+      apellido:       payload.apellidos      ?? '',
+      fechaNac:       payload.fechaNac       ? new Date(payload.fechaNac).toISOString() : new Date(0).toISOString(),
+      direccion:      payload.direccion      ?? '',
+      telefono:       payload.telefono       ?? '',
+      imagen:         payload.foto           ?? null,
+      idDepartamento: payload.idDepartamento ?? null,
     };
+    const body = { persona };
     const res = await fetch(url, {
       method: 'POST',
       headers: this.baseApi.getDefaultHeaders(),
@@ -57,16 +56,15 @@ export class PersonaApi {
 
   async update(id: number, payload: Partial<PersonaDTO>): Promise<PersonaDTO> {
     const url = this.baseApi.getBaseUrl(`${this.endpoint}/${id}`);
-    // PUT must include id in body matching the route, and all fields.
     const body: any = {
       id,
-      nombre:          payload.nombre          ?? '',
-      apellidos:       payload.apellidos       ?? '',
-      fechaNac:        payload.fechaNac        ? new Date(payload.fechaNac).toISOString() : '',
-      direccion:       payload.direccion       ?? '',
-      telefono:        payload.telefono        ?? '',
-      foto:            payload.foto            ?? null,
-      idDepartamento:  payload.idDepartamento  ?? null,
+      nombre:         payload.nombre         ?? '',
+      apellido:       payload.apellidos      ?? '',
+      fechaNac:       payload.fechaNac       ? new Date(payload.fechaNac).toISOString() : new Date(0).toISOString(),
+      direccion:      payload.direccion      ?? '',
+      telefono:       payload.telefono       ?? '',
+      imagen:         payload.foto           ?? null,
+      idDepartamento: payload.idDepartamento ?? null,
     };
     const res = await fetch(url, {
       method: 'PUT',
