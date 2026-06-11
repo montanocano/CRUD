@@ -6,10 +6,12 @@ import { DepartamentoDTO } from '../../domain/dtos/DepartamentoDTO';
 
 @injectable()
 export class DepartamentoApi {
-  @inject(TYPES.BaseApi)
-  public baseApi!: BaseApi;
-
   private endpoint = '/api/Departamentos';
+
+  constructor(
+    @inject(TYPES.BaseApi)
+    public baseApi: BaseApi
+  ) {}
 
   async getAll(): Promise<DepartamentoDTO[]> {
     const url = this.baseApi.getBaseUrl(this.endpoint);
