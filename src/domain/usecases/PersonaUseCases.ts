@@ -5,8 +5,10 @@ import { IPersonaRepository } from '../interfaces/IPersonaRepository';
 
 @injectable()
 export class PersonaUseCases {
-  @inject(TYPES.PersonaRepository)
-  public personaRepository!: IPersonaRepository;
+  constructor(
+    @inject(TYPES.PersonaRepository)
+    public personaRepository: IPersonaRepository
+  ) {}
 
   private calculateAge(fechaNac?: string | null): number {
     if (!fechaNac) return 0;

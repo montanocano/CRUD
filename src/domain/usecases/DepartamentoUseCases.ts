@@ -5,8 +5,10 @@ import { IDepartamentoRepository } from '../interfaces/IDepartamentoRepository';
 
 @injectable()
 export class DepartamentoUseCases {
-  @inject(TYPES.DepartamentoRepository)
-  public departamentoRepository!: IDepartamentoRepository;
+  constructor(
+    @inject(TYPES.DepartamentoRepository)
+    public departamentoRepository: IDepartamentoRepository
+  ) {}
 
   getDepartamentos() {
     return this.departamentoRepository.getAll();

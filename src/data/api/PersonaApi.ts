@@ -6,10 +6,12 @@ import { PersonaDTO } from '../../domain/dtos/PersonaDTO';
 
 @injectable()
 export class PersonaApi {
-  @inject(TYPES.BaseApi)
-  public baseApi!: BaseApi;
-
   private endpoint = '/api/Personas';
+
+  constructor(
+    @inject(TYPES.BaseApi)
+    public baseApi: BaseApi
+  ) {}
 
   async getAll(): Promise<PersonaDTO[]> {
     const url = this.baseApi.getBaseUrl(this.endpoint);
@@ -53,7 +55,6 @@ export class PersonaApi {
     if (!res.ok) throw new Error(`Delete Persona ${id} failed: ${res.status}`);
   }
 
-  // Optional: upload image if API supports it
   async uploadImage(fileBlob: Blob): Promise<string> {
     const url = this.baseApi.getBaseUrl(`${this.endpoint}/upload-image`);
     const form = new FormData();

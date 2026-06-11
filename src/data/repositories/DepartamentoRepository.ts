@@ -7,8 +7,10 @@ import { IDepartamentoRepository } from '../../domain/interfaces/IDepartamentoRe
 
 @injectable()
 export class DepartamentoRepository implements IDepartamentoRepository {
-  @inject(TYPES.DepartamentoApi)
-  public departamentoApi!: DepartamentoApi;
+  constructor(
+    @inject(TYPES.DepartamentoApi)
+    public departamentoApi: DepartamentoApi
+  ) {}
 
   getAll(): Promise<DepartamentoDTO[]> {
     return this.departamentoApi.getAll();

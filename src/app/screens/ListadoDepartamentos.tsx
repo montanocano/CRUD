@@ -50,15 +50,15 @@ const ListadoDepartamentos: React.FC = observer(() => {
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Departamentos ({departamentosVM.departamentos.length})</Text>
       </View>
-      
+
       <FlatList
-        data={departamentosVM.departamentos}
-        keyExtractor={(item) => item.idDepartamento.toString()}
+        data={departamentosVM.departamentos.filter((d: any) => d?.idDepartamento != null)}
+        keyExtractor={(item) => String(item.idDepartamento)}
         renderItem={({ item }) => (
-          <DepartamentoListItem 
-            departamento={item} 
-            onPress={() => {}} 
-            onDelete={() => handleDelete(item.idDepartamento)} 
+          <DepartamentoListItem
+            departamento={item}
+            onPress={() => {}}
+            onDelete={() => handleDelete(item.idDepartamento)}
           />
         )}
         contentContainerStyle={styles.listContent}
