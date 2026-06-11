@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { observer } from 'mobx-react-lite';
-import DepartamentosViewModel from '../ui/viewmodels/DepartamentosViewModel';
-import DepartamentoListItem from '../components/DepartamentoListItem';
+import { useRouter } from 'expo-router';
+import DepartamentosViewModel from '../../ui/viewmodels/DepartamentosViewModel';
+import DepartamentoListItem from '../../components/DepartamentoListItem';
 
 const departamentosVM = DepartamentosViewModel.getInstance();
 
 const ListadoDepartamentos: React.FC = observer(() => {
+  const router = useRouter();
+
   useEffect(() => {
     departamentosVM.loadDepartamentos();
   }, []);
@@ -19,26 +23,93 @@ const ListadoDepartamentos: React.FC = observer(() => {
     }
   };
 
-  if (departamentosVM.isLoading) return <div>Loading...</div>;
-  if (departamentosVM.error) return <div>Error: {departamentosVM.error}</div>;
+  if (departamentosVM.isLoading) {
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" color="#1976D2" />
+      </View>
+    );
+  }
+
+  if (departamentosVM.error) {
+    return (
+      <View style={styles.center}>
+        <Text style={styles.errorText}>Error: {departamentosVM.error}</Text>
+        <TouchableOpacity style={styles.retryButton} onPress={() => departamentosVM.loadDepartamentos()}>
+          <Text style={styles.retryText}>Retry</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
   return (
-    <div>
-      <header style={{ background: '#1976D2', color: 'white', padding: 12 }}>
-        <button onClick={() => history.back()}>&larr;</button>
-        <span style={{ marginLeft: 8 }}>Departamentos ({departamentosVM.departamentos.length})</span>
-      </header>
-      <main>
-        <ul>
-          {departamentosVM.departamentos.map((d: any) => (
-            <li key={d.idDepartamento}>
-              <DepartamentoListItem departamento={d} onPress={() => {}} onDelete={() => handleDelete(d.idDepartamento)} />
-            </li>
-          ))}
-        </ul>
-      </main>
-    </div>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => router.back()}>
+          <Text style={styles.backButton}>&larr;</Text>
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Departamentos ({departamentosVM.departamentos.length})</Text>
+      </View>
+      
+      <FlatList
+        data={departamentosVM.departamentos}
+        keyExtractor={(item) => item.idDepartamento.toString()}
+        renderItem={({ item }) => (
+          <DepartamentoListItem 
+            departamento={item} 
+            onPress={() => {}} 
+            onDelete={() => handleDelete(item.idDepartamento)} 
+          />
+        )}
+        contentContainerStyle={styles.listContent}
+      />
+    </View>
   );
+});
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  header: {
+    height: 60,
+    backgroundColor: '#1976D2',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 15,
+    elevation: 4,
+  },
+  headerTitle: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginLeft: 15,
+  },
+  backButton: {
+    color: '#fff',
+    fontSize: 24,
+  },
+  listContent: {
+    paddingBottom: 20,
+  },
+  errorText: {
+    color: '#D32F2F',
+    marginBottom: 10,
+  },
+  retryButton: {
+    padding: 10,
+    backgroundColor: '#1976D2',
+    borderRadius: 5,
+  },
+  retryText: {
+    color: '#fff',
+  },
 });
 
 export default ListadoDepartamentos;

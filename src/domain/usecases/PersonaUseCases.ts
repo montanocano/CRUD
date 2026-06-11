@@ -1,10 +1,12 @@
+import 'reflect-metadata';
 import { injectable, inject } from 'inversify';
 import TYPES from '../../core/types';
 import { IPersonaRepository } from '../interfaces/IPersonaRepository';
 
 @injectable()
 export class PersonaUseCases {
-  constructor(@inject(TYPES.PersonaRepository) private personaRepository: IPersonaRepository) {}
+  @inject(TYPES.PersonaRepository)
+  public personaRepository!: IPersonaRepository;
 
   private calculateAge(fechaNac?: string | null): number {
     if (!fechaNac) return 0;

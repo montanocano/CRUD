@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { injectable, inject } from 'inversify';
 import TYPES from '../../core/types';
 import { DepartamentoApi } from '../api/DepartamentoApi';
@@ -6,7 +7,8 @@ import { IDepartamentoRepository } from '../../domain/interfaces/IDepartamentoRe
 
 @injectable()
 export class DepartamentoRepository implements IDepartamentoRepository {
-  constructor(@inject(TYPES.DepartamentoApi) private departamentoApi: DepartamentoApi) {}
+  @inject(TYPES.DepartamentoApi)
+  public departamentoApi!: DepartamentoApi;
 
   getAll(): Promise<DepartamentoDTO[]> {
     return this.departamentoApi.getAll();

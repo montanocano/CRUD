@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { injectable, inject } from 'inversify';
 import TYPES from '../../core/types';
 import { PersonaApi } from '../api/PersonaApi';
@@ -6,7 +7,8 @@ import { IPersonaRepository } from '../../domain/interfaces/IPersonaRepository';
 
 @injectable()
 export class PersonaRepository implements IPersonaRepository {
-  constructor(@inject(TYPES.PersonaApi) private personaApi: PersonaApi) {}
+  @inject(TYPES.PersonaApi)
+  public personaApi!: PersonaApi;
 
   getAll(): Promise<PersonaDTO[]> {
     return this.personaApi.getAll();

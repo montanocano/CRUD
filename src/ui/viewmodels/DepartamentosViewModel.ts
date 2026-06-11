@@ -16,13 +16,7 @@ export default class DepartamentosViewModel {
 
   private constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
-    try {
-      this.departamentoUseCases = container.get(TYPES.DepartamentoUseCases);
-    } catch (e) {
-      // placeholder until binding exists
-      // @ts-ignore
-      this.departamentoUseCases = new DepartamentoUseCases(null as any);
-    }
+    this.departamentoUseCases = container.get(TYPES.DepartamentoUseCases);
   }
 
   static getInstance() {

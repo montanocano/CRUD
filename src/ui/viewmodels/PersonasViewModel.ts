@@ -16,14 +16,8 @@ export default class PersonasViewModel {
 
   private constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
-    // Resolve usecases from container when available
-    try {
-      this.personaUseCases = container.get(TYPES.PersonaUseCases);
-    } catch (e) {
-      // placeholder until binding exists
-      // @ts-ignore
-      this.personaUseCases = new PersonaUseCases(null as any);
-    }
+    // Resolve usecases from container
+    this.personaUseCases = container.get(TYPES.PersonaUseCases);
   }
 
   static getInstance() {

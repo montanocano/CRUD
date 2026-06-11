@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { PersonaUIModel } from '../ui/models/PersonaUIModel';
 
 type Props = {
@@ -10,26 +11,103 @@ type Props = {
 const PersonaListItem: React.FC<Props> = ({ persona, onPress, onDelete }) => {
   const [imageError, setImageError] = useState(false);
   const initials = persona.initials || '';
+
   return (
-    <div style={{ display: 'flex', alignItems: 'center', padding: 8, borderBottom: '1px solid #eee' }}>
-      <div style={{ width: 48, height: 48, borderRadius: 24, background: persona.color || '#ccc', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', marginRight: 12 }} onClick={onPress}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <View style={[styles.avatar, { backgroundColor: persona.color || '#ccc' }]}>
         {persona.foto && !imageError ? (
-          // eslint-disable-next-line jsx-a11y/img-redundant-alt
-          <img src={persona.foto} alt="avatar" style={{ width: '100%', height: '100%', borderRadius: '50%' }} onError={() => setImageError(true)} />
+          <Image 
+            source={{ uri: persona.foto }} 
+            style={styles.avatarImage} 
+            onError={() => setImageError(true)} 
+          />
         ) : (
-          <span>{initials}</span>
+          <Text style={styles.initials}>{initials}</Text>
         )}
-      </div>
-      <div style={{ flex: 1 }} onClick={onPress}>
-        <div style={{ fontWeight: 600 }}>{persona.nombre} {persona.apellidos}</div>
-        <div style={{ fontSize: 12 }}>{persona.telefono}</div>
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        {persona.nombreDepartamento && <span style={{ background: '#eee', padding: '4px 8px', borderRadius: 12, marginRight: 8 }}>{persona.nombreDepartamento}</span>}
-        <button onClick={onDelete} aria-label="delete">Eliminar</button>
-      </div>
-    </div>
+      </View>
+
+      <View style={styles.info}>
+        <Text style={styles.name}>{persona.nombre} {persona.apellidos}</Text>
+        <Text style={styles.phone}>{persona.telefono}</Text>
+      </View>
+
+      <View style={styles.rightContent}>
+        {persona.nombreDepartamento && (
+          <View style={styles.tag}>
+            <Text style={styles.tagText}>{persona.nombreDepartamento}</Text>
+          </View>
+        )}
+        <TouchableOpacity style={styles.deleteButton} onPress={onDelete}>
+          <Text style={styles.deleteText}>Eliminar</Text>
+        </TouchableOpacity>
+      </View>
+    </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+    backgroundColor: '#fff',
+  },
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+  },
+  avatarImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+  },
+  initials: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  info: {
+    flex: 1,
+  },
+  name: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#333',
+  },
+  phone: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 2,
+  },
+  rightContent: {
+    alignItems: 'flex-end',
+  },
+  tag: {
+    backgroundColor: '#F0F0F0',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+    marginBottom: 6,
+  },
+  tagText: {
+    fontSize: 10,
+    color: '#555',
+  },
+  deleteButton: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+  },
+  deleteText: {
+    color: '#D32F2F',
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+});
 
 export default PersonaListItem;

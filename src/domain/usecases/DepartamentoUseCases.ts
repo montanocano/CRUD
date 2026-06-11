@@ -1,10 +1,12 @@
+import 'reflect-metadata';
 import { injectable, inject } from 'inversify';
 import TYPES from '../../core/types';
-import { IDepartamentoRepository } from '../interfaces/IDepartamentoRepository';}
+import { IDepartamentoRepository } from '../interfaces/IDepartamentoRepository';
 
 @injectable()
 export class DepartamentoUseCases {
-  constructor(@inject(TYPES.DepartamentoRepository) private departamentoRepository: IDepartamentoRepository) {}
+  @inject(TYPES.DepartamentoRepository)
+  public departamentoRepository!: IDepartamentoRepository;
 
   getDepartamentos() {
     return this.departamentoRepository.getAll();

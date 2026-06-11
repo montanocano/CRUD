@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { injectable, inject } from 'inversify';
 import TYPES from '../../core/types';
 import { BaseApi } from '../../core/BaseApi';
@@ -5,7 +6,8 @@ import { PersonaDTO } from '../../domain/dtos/PersonaDTO';
 
 @injectable()
 export class PersonaApi {
-  constructor(@inject(TYPES.BaseApi) private baseApi: BaseApi) {}
+  @inject(TYPES.BaseApi)
+  public baseApi!: BaseApi;
 
   private endpoint = '/api/Personas';
 
