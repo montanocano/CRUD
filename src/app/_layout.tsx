@@ -10,6 +10,7 @@ export default function RootLayout() {
       <Stack.Screen name="screens/ListadoPersonasScreen" />
       <Stack.Screen name="screens/EditarInsertarPersonaScreen" />
       <Stack.Screen name="screens/ListadoDepartamentos" />
+      <Stack.Screen name="screens/EditarInsertarDepartamentoScreen" />
     </Stack>
   );
 }
