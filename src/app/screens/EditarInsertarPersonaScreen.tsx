@@ -47,12 +47,10 @@ const EditarInsertarPersonaScreen: React.FC = observer(() => {
       if (selected) {
         // Include all required fields for PUT
         payload.id = selected.id;
-        payload.fechaNac = selected.fechaNac ?? null;
+        if (selected.fechaNac) payload.fechaNac = selected.fechaNac;
         payload.foto = selected.foto ?? null;
         await personasVM.updatePersona(selected.id, payload);
       } else {
-        payload.fechaNac = null;
-        payload.foto = null;
         await personasVM.addPersona(payload);
       }
       router.back();
