@@ -47,6 +47,7 @@ export class DepartamentoApi {
       body: JSON.stringify(body),
     });
     if (!res.ok) await this.throwWithBody(res, 'Create Departamento failed');
+    if (res.status === 204 || res.headers.get('content-length') === '0') return payload as DepartamentoDTO;
     return (await res.json()) as DepartamentoDTO;
   }
 
@@ -62,6 +63,7 @@ export class DepartamentoApi {
       body: JSON.stringify(body),
     });
     if (!res.ok) await this.throwWithBody(res, `Update Departamento ${id} failed`);
+    if (res.status === 204 || res.headers.get('content-length') === '0') return payload as DepartamentoDTO;
     return (await res.json()) as DepartamentoDTO;
   }
 

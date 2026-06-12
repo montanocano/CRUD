@@ -19,7 +19,7 @@ const ListadoDepartamentos: React.FC = observer(() => {
     try {
       await departamentosVM.deleteDepartamento(id);
     } catch (e: any) {
-      alert(e.message || 'Error deleting');
+      alert(e.message || 'Error al eliminar');
     }
   };
 
@@ -59,9 +59,6 @@ const ListadoDepartamentos: React.FC = observer(() => {
           <Text style={styles.backButton}>←</Text>
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Departamentos ({departamentosVM.departamentos.length})</Text>
-        <TouchableOpacity style={styles.addButton} onPress={handleAdd}>
-          <Text style={styles.addButtonText}>+ Nuevo</Text>
-        </TouchableOpacity>
       </View>
 
       <FlatList
@@ -78,10 +75,15 @@ const ListadoDepartamentos: React.FC = observer(() => {
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
             <Text style={styles.emptyText}>No hay departamentos.</Text>
-            <Text style={styles.emptySubText}>Pulsa "+ Nuevo" para añadir uno.</Text>
+            <Text style={styles.emptySubText}>Pulsa "+" para añadir uno.</Text>
           </View>
         }
       />
+
+      {/* FAB — same style as ListadoPersonasScreen */}
+      <TouchableOpacity style={styles.fab} onPress={handleAdd}>
+        <Text style={styles.fabIcon}>+</Text>
+      </TouchableOpacity>
     </View>
   );
 });
@@ -99,19 +101,34 @@ const styles = StyleSheet.create({
     marginLeft: 15, flex: 1,
   },
   backButton: { color: '#fff', fontSize: 24 },
-  addButton: {
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    paddingHorizontal: 12, paddingVertical: 6,
-    borderRadius: 16, borderWidth: 1, borderColor: 'rgba(255,255,255,0.5)',
-  },
-  addButtonText: { color: '#fff', fontWeight: '600', fontSize: 14 },
-  listContent: { paddingBottom: 20 },
+  listContent: { paddingBottom: 80 },
   errorText: { color: '#D32F2F', marginBottom: 10 },
   retryButton: { padding: 10, backgroundColor: '#1976D2', borderRadius: 5 },
   retryText: { color: '#fff' },
   emptyContainer: { flex: 1, alignItems: 'center', paddingTop: 60 },
   emptyText: { fontSize: 16, color: '#666', marginBottom: 4 },
   emptySubText: { fontSize: 14, color: '#aaa' },
+  fab: {
+    position: 'absolute',
+    right: 20,
+    bottom: 20,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: '#1976D2',
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 6,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+  },
+  fabIcon: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
 });
 
 export default ListadoDepartamentos;

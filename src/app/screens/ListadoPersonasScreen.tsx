@@ -31,7 +31,7 @@ const ListadoPersonasScreen: React.FC = observer(() => {
     try {
       await personasVM.deletePersona(id);
     } catch (e: any) {
-      alert(e.message || 'Error deleting');
+      alert(e.message || 'Error al eliminar');
     }
   };
 
@@ -48,7 +48,7 @@ const ListadoPersonasScreen: React.FC = observer(() => {
       <View style={styles.center}>
         <Text style={styles.errorText}>Error: {personasVM.error}</Text>
         <TouchableOpacity style={styles.retryButton} onPress={() => personasVM.loadPersonas()}>
-          <Text style={styles.retryText}>Retry</Text>
+          <Text style={styles.retryText}>Reintentar</Text>
         </TouchableOpacity>
       </View>
     );

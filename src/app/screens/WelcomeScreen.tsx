@@ -8,12 +8,12 @@ export default function WelcomeScreen() {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>CRUD App</Text>
+        <Text style={styles.headerTitle}>Aplicación CRUD</Text>
       </View>
 
       <View style={styles.content}>
-        <Text style={styles.welcomeText}>Welcome</Text>
-        <Text style={styles.subText}>Manage your data efficiently</Text>
+        <Text style={styles.welcomeText}>Bienvenido</Text>
+        <Text style={styles.subText}>Gestiona tus datos eficientemente</Text>
 
         <View style={styles.cardContainer}>
           <TouchableOpacity 
@@ -21,7 +21,7 @@ export default function WelcomeScreen() {
             onPress={() => router.push('/screens/ListadoPersonasScreen')}
           >
             <Text style={styles.cardTitle}>Personas</Text>
-            <Text style={styles.cardDesc}>View and manage people</Text>
+            <Text style={styles.cardDesc}>Ver y gestionar personas</Text>
           </TouchableOpacity>
 
           <TouchableOpacity 
@@ -29,7 +29,7 @@ export default function WelcomeScreen() {
             onPress={() => router.push('/screens/ListadoDepartamentos')}
           >
             <Text style={styles.cardTitle}>Departamentos</Text>
-            <Text style={styles.cardDesc}>Manage organization units</Text>
+            <Text style={styles.cardDesc}>Gestionar unidades organizativas</Text>
           </TouchableOpacity>
         </View>
       </View>

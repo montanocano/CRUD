@@ -35,22 +35,25 @@ export class PersonaApi {
 
   async create(payload: Partial<PersonaDTO>): Promise<PersonaDTO> {
     const url = this.baseApi.getBaseUrl(this.endpoint);
-    const persona = {
+    // Flat body — no nested "persona" wrapper.
+    // imagen must be a string (never null) to pass server validation.
+    const body = {
       nombre:         payload.nombre         ?? '',
       apellido:       payload.apellidos      ?? '',
       fechaNac:       payload.fechaNac       ? new Date(payload.fechaNac).toISOString() : new Date(0).toISOString(),
       direccion:      payload.direccion      ?? '',
       telefono:       payload.telefono       ?? '',
-      imagen:         payload.foto           ?? null,
+      imagen:         payload.foto           ?? '',
       idDepartamento: payload.idDepartamento ?? null,
     };
-    const body = { persona };
     const res = await fetch(url, {
       method: 'POST',
       headers: this.baseApi.getDefaultHeaders(),
       body: JSON.stringify(body),
     });
     if (!res.ok) await this.throwWithBody(res, 'Create Persona failed');
+    // Some servers return 201 with the created object; others return 204 with no body.
+    if (res.status === 204 || res.headers.get('content-length') === '0') return payload as PersonaDTO;
     return (await res.json()) as PersonaDTO;
   }
 
@@ -63,7 +66,7 @@ export class PersonaApi {
       fechaNac:       payload.fechaNac       ? new Date(payload.fechaNac).toISOString() : new Date(0).toISOString(),
       direccion:      payload.direccion      ?? '',
       telefono:       payload.telefono       ?? '',
-      imagen:         payload.foto           ?? null,
+      imagen:         payload.foto           ?? '',
       idDepartamento: payload.idDepartamento ?? null,
     };
     const res = await fetch(url, {
@@ -72,6 +75,8 @@ export class PersonaApi {
       body: JSON.stringify(body),
     });
     if (!res.ok) await this.throwWithBody(res, `Update Persona ${id} failed`);
+    // PUT endpoints commonly return 204 No Content (empty body).
+    if (res.status === 204 || res.headers.get('content-length') === '0') return payload as PersonaDTO;
     return (await res.json()) as PersonaDTO;
   }
 

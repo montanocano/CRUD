@@ -8,12 +8,15 @@ type Props = {
 };
 
 const DepartamentoListItem: React.FC<Props> = ({ departamento, onPress, onDelete }) => {
+  // Use first letter of department name as initials, same pattern as PersonaListItem
+  const initial = (departamento.nombreDepartamento || 'D').charAt(0).toUpperCase();
+
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <View style={[styles.iconContainer, { backgroundColor: departamento.color || '#ccc' }]}>
-        <Text style={styles.iconText}>{departamento.icon || 'D'}</Text>
+      <View style={[styles.avatar, { backgroundColor: departamento.color || '#607D8B' }]}>
+        <Text style={styles.initials}>{initial}</Text>
       </View>
-      
+
       <View style={styles.info}>
         <Text style={styles.name}>{departamento.nombreDepartamento}</Text>
       </View>
@@ -34,15 +37,16 @@ const styles = StyleSheet.create({
     borderBottomColor: '#eee',
     backgroundColor: '#fff',
   },
-  iconContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 8,
+  // Circle avatar — matches PersonaListItem exactly
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
   },
-  iconText: {
+  initials: {
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',

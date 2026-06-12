@@ -13,12 +13,15 @@ export interface PersonaUIModel {
 }
 
 export function toPersonaUIModel(dto: any): PersonaUIModel {
-  const initials = `${(dto.nombre || '').charAt(0) || ''}${(dto.apellidos || '').charAt(0) || ''}`.toUpperCase();
+  // The server returns the field as "apellido" (no trailing s); the local DTO
+  // uses "apellidos". Accept either so the list always shows surnames.
+  const apellidos = dto.apellidos ?? dto.apellido ?? '';
+  const initials = `${(dto.nombre || '').charAt(0) || ''}${apellidos.charAt(0) || ''}`.toUpperCase();
   const color = ['#D32F2F', '#1976D2', '#388E3C', '#F57C00'][dto.idDepartamento % 4] || '#607D8B';
   return {
     id: dto.id,
     nombre: dto.nombre,
-    apellidos: dto.apellidos,
+    apellidos,
     fechaNac: dto.fechaNac,
     direccion: dto.direccion,
     telefono: dto.telefono,

@@ -29,7 +29,7 @@ export default function Index() {
   return (
     <View style={styles.container}>
       <ActivityIndicator size="large" color="#1976D2" />
-      <Text style={styles.loadingText}>Initializing App...</Text>
+      <Text style={styles.loadingText}>Inicializando aplicación...</Text>
     </View>
   );
 }

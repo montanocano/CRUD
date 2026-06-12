@@ -55,7 +55,7 @@ const EditarInsertarPersonaScreen: React.FC = observer(() => {
       }
       router.back();
     } catch (e: any) {
-      alert(e.message || 'Error saving');
+      alert(e.message || 'Error al guardar');
     } finally {
       setIsSaving(false);
     }
